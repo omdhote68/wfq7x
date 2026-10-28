@@ -107,11 +107,11 @@ pip install -r backend/requirements.txt && python -m pytest          # backend
 cd frontend && npm install && npm test && npm run typecheck && npm run build
 ```
 
-## Deployment (not yet performed)
+## Deployment
 
-- **Backend (Heroku-compatible):** deploy `backend/` (it has a `Procfile`); set `CORS_ORIGINS` to the frontend URL and `FETCH_ON_STARTUP=true` (or ship `data/real` files). Free dynos have ephemeral disks, so data is re-fetched on restart.
-- **Frontend (Vercel):** root directory `frontend/`, set `VITE_API_BASE_URL` to the backend URL.
-- Live URL: *not deployed yet.* Repository URL: *not published yet.*
+- **Backend (Render):** create a Blueprint from this repository using `render.yaml`. The service fetches the configured Elexon period on startup (`DATA_MODE=real`, `FETCH_ON_STARTUP=true`); its filesystem is ephemeral, so it re-fetches after restart. Once the frontend is deployed, replace the wildcard `CORS_ORIGINS` value with its exact origin.
+- **Frontend (Vercel):** import this repository and set the project root directory to `frontend`. Add `VITE_API_BASE_URL` with the deployed Render service URL (no trailing slash), then redeploy.
+- The frontend is not usable for live analytics until the backend is deployed and `VITE_API_BASE_URL` is configured.
 
 ## Known limitations and assumptions
 

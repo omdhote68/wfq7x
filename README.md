@@ -109,7 +109,7 @@ cd frontend && npm install && npm test && npm run typecheck && npm run build
 
 ## Deployment
 
-- **Backend (Render):** create a Blueprint from this repository using `render.yaml`. The service fetches the configured Elexon period on startup (`DATA_MODE=real`, `FETCH_ON_STARTUP=true`); its filesystem is ephemeral, so it re-fetches after restart. Once the frontend is deployed, replace the wildcard `CORS_ORIGINS` value with its exact origin.
+- **Backend (Render):** create a Blueprint from this repository using `render.yaml`. The service fetches the configured Elexon period on startup (`DATA_MODE=real`, `FETCH_ON_STARTUP=true`); its filesystem is ephemeral, so it re-fetches after restart. `CORS_ORIGINS` should contain the exact deployed frontend origin.
 - **Frontend (Vercel):** import this repository and set the project root directory to `frontend`. Add `VITE_API_BASE_URL` with the deployed Render service URL (no trailing slash), then redeploy.
 - The frontend is not usable for live analytics until the backend is deployed and `VITE_API_BASE_URL` is configured.
 
